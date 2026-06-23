@@ -355,14 +355,6 @@ footer {
 ::view-transition-old(root) { animation: 200ms cubic-bezier(0.4, 0, 1, 1) both page-out; }
 ::view-transition-new(root) { animation: 300ms cubic-bezier(0, 0, 0.2, 1) both page-in; }
 
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 9999;
-}
-
 /* Ajustes exclusivos para telas menores (Celulares) */
     @media (max-width: 768px) {
         
@@ -393,3 +385,7 @@ footer {
     
     
     }
+      .container h2 {
+    margin-bottom: 20px;
+}
+
