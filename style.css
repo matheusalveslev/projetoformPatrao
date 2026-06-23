@@ -365,9 +365,15 @@ footer {
 
 /* Ajustes exclusivos para telas menores (Celulares) */
     @media (max-width: 768px) {
+        
+        /* O segredo para não encavalar: forçar a altura a se adaptar ao texto duplo */
+        .top-header {
+            height: auto !important; 
+            padding-bottom: 20px; /* Dá o respiro real entre o cabeçalho e o resto do site */
+        }
+
         .header-inner {
             flex-wrap: wrap; 
-            padding-bottom: 15px; /* Dá um respiro extra no fundo do cabeçalho */
         }
         
         .header-inner img {
@@ -383,11 +389,12 @@ footer {
             width: 100%; 
             text-align: center; 
             font-size: 16px; 
-            margin-top: 20px; /* Espaço entre o logo e o título */
-            margin-bottom: 10px; /* Cria um espaço entre o título e o conteúdo de baixo */
+            margin-top: 15px; 
+            margin-bottom: 0; 
             white-space: normal; 
             overflow: visible;
-            line-height: 1.4; /* Melhora o espaçamento entre as duas linhas do próprio título */
+            line-height: 1.4; 
         }
+    
     
     }
