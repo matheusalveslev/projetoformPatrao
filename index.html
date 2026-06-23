@@ -355,7 +355,7 @@
             });
         }
 
-        // Menu Mobile (Hambúrguer)
+         // ── Cole este bloco no <script> de cada página que usar o hambúrguer ──
         (function () {
             const hamburger = document.getElementById('hamburger');
             if (!hamburger) return;
@@ -366,12 +366,11 @@
             mobileMenu.className = 'mobile-menu';
             mobileMenu.id = 'mobileMenu';
 
-            // Estilos do menu mobile
             mobileMenu.style.position = 'fixed';
-            mobileMenu.style.top = '0';
+            mobileMenu.style.top = '60px'; // ajuste para a altura real do seu header
             mobileMenu.style.left = '0';
             mobileMenu.style.width = '100%';
-            mobileMenu.style.zIndex = '9999';
+            mobileMenu.style.zIndex = '999'; // menor que o header
 
             navLinks.forEach(link => {
                 const a = document.createElement('a');
