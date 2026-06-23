@@ -364,16 +364,15 @@ footer {
 }
 
 /* Ajustes exclusivos para telas menores (Celulares) */
+   /* Ajustes exclusivos para telas menores (Celulares) */
     @media (max-width: 768px) {
         
-        /* 1. Tira o modo flutuante (fixed) para o cabeçalho empurrar o site para baixo */
         .top-header {
             position: relative !important; 
             height: auto !important; 
             padding-bottom: 15px !important;
         }
 
-        /* 2. Garante que a caixa interna não tenha limite de altura */
         .header-inner {
             flex-wrap: wrap !important; 
             height: auto !important;
@@ -381,16 +380,24 @@ footer {
         
         .header-inner img {
             width: 140px !important; 
+            order: 1 !important; /* 1º: Logo na esquerda */
         }
         
         #hamburger {
-            order: 2 !important; 
-            margin-top: 5px !important; /* Alinha o menu com o logo */
+            order: 2 !important; /* 2º: Hambúrguer na direita */
+            margin-top: 5px !important; 
         }
         
-        /* 3. Organiza o título na linha de baixo com espaçamento correto */
-        .header-inner h1 {
+        /* 3º: O Menu com os links entra logo abaixo do Logo/Hambúrguer */
+        .header-inner nav, .mobile-menu {
             order: 3 !important; 
+            width: 100% !important; /* Ocupa a linha toda para jogar o título pra baixo */
+            margin-top: 10px !important;
+        }
+
+        /* 4º: O Título vai lá para o final do cabeçalho */
+        .header-inner h1 {
+            order: 4 !important; 
             width: 100% !important; 
             text-align: center !important; 
             font-size: 16px !important; 
@@ -400,10 +407,10 @@ footer {
             line-height: 1.4 !important; 
         }
 
-        /* 4. Tira a margem do container que compensava o menu flutuante */
         .ticker-wrapper {
             margin-top: 0 !important;
         }
+    
     
     
     }
