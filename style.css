@@ -366,34 +366,43 @@ footer {
 /* Ajustes exclusivos para telas menores (Celulares) */
     @media (max-width: 768px) {
         
-        /* O segredo para não encavalar: forçar a altura a se adaptar ao texto duplo */
+        /* 1. Tira o modo flutuante (fixed) para o cabeçalho empurrar o site para baixo */
         .top-header {
+            position: relative !important; 
             height: auto !important; 
-            padding-bottom: 20px; /* Dá o respiro real entre o cabeçalho e o resto do site */
+            padding-bottom: 15px !important;
         }
 
+        /* 2. Garante que a caixa interna não tenha limite de altura */
         .header-inner {
-            flex-wrap: wrap; 
+            flex-wrap: wrap !important; 
+            height: auto !important;
         }
         
         .header-inner img {
-            width: 140px; 
+            width: 140px !important; 
         }
         
         #hamburger {
-            order: 2; 
+            order: 2 !important; 
+            margin-top: 5px !important; /* Alinha o menu com o logo */
         }
         
+        /* 3. Organiza o título na linha de baixo com espaçamento correto */
         .header-inner h1 {
-            order: 3; 
-            width: 100%; 
-            text-align: center; 
-            font-size: 16px; 
-            margin-top: 15px; 
-            margin-bottom: 0; 
-            white-space: normal; 
-            overflow: visible;
-            line-height: 1.4; 
+            order: 3 !important; 
+            width: 100% !important; 
+            text-align: center !important; 
+            font-size: 16px !important; 
+            margin-top: 15px !important; 
+            margin-bottom: 5px !important; 
+            white-space: normal !important; 
+            line-height: 1.4 !important; 
+        }
+
+        /* 4. Tira a margem do container que compensava o menu flutuante */
+        .ticker-wrapper {
+            margin-top: 0 !important;
         }
     
     
