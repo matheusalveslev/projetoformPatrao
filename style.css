@@ -309,7 +309,7 @@ footer {
   }
 
   .container {
-    padding-top: calc(var(--header-h) + 16px);
+  padding-top: calc(var(--header-h) + 41px + 24px); /* header + ticker + espaço */
   }
 
   nav ul, .nav-links { display: none; }
