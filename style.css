@@ -364,52 +364,31 @@ footer {
 }
 
 /* Ajustes exclusivos para telas menores (Celulares) */
-   /* Ajustes exclusivos para telas menores (Celulares) */
     @media (max-width: 768px) {
         
-        .top-header {
-            position: relative !important; 
-            height: auto !important; 
-            padding-bottom: 15px !important;
+        /* 1. Trava o cabeçalho para ele ficar no tamanho certinho e alinhado */
+        .header-inner {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            flex-wrap: nowrap !important;
         }
 
-        .header-inner {
-            flex-wrap: wrap !important; 
-            height: auto !important;
-        }
-        
+        /* 2. Ajusta o tamanho da logo */
         .header-inner img {
             width: 140px !important; 
-            order: 1 !important; /* 1º: Logo na esquerda */
-        }
-        
-        #hamburger {
-            order: 2 !important; /* 2º: Hambúrguer na direita */
-            margin-top: 5px !important; 
-        }
-        
-        /* 3º: O Menu com os links entra logo abaixo do Logo/Hambúrguer */
-        .header-inner nav, .mobile-menu {
-            order: 3 !important; 
-            width: 100% !important; /* Ocupa a linha toda para jogar o título pra baixo */
-            margin-top: 10px !important;
         }
 
-        /* 4º: O Título vai lá para o final do cabeçalho */
+        /* 3. A MÁGICA: Oculta o título longo no celular para despoluir a tela e não quebrar o menu */
         .header-inner h1 {
-            order: 4 !important; 
-            width: 100% !important; 
-            text-align: center !important; 
-            font-size: 16px !important; 
-            margin-top: 15px !important; 
-            margin-bottom: 5px !important; 
-            white-space: normal !important; 
-            line-height: 1.4 !important; 
+            display: none !important; 
         }
 
+        /* 4. Garante que o container de baixo não fique com margem errada */
         .ticker-wrapper {
-            margin-top: 0 !important;
+            margin-top: 15px !important;
         }
+    
     
     
     
