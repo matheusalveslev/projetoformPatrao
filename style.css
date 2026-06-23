@@ -366,24 +366,28 @@ footer {
 /* Ajustes exclusivos para telas menores (Celulares) */
     @media (max-width: 768px) {
         .header-inner {
-            flex-wrap: wrap; /* Permite quebrar a linha do cabeçalho */
+            flex-wrap: wrap; 
+            padding-bottom: 15px; /* Dá um respiro extra no fundo do cabeçalho */
         }
         
         .header-inner img {
-            width: 140px; /* Diminui o logo levemente para ganhar espaço */
+            width: 140px; 
         }
         
         #hamburger {
-            order: 2; /* Mantém o menu hambúrguer no topo, ao lado do logo */
+            order: 2; 
         }
         
         .header-inner h1 {
-            order: 3; /* Joga o título para a linha de baixo */
-            width: 100%; /* Faz o título ocupar a largura total da tela */
-            text-align: center; /* Centraliza o texto para ficar com visual de aplicativo */
-            font-size: 16px; /* Reduz o tamanho da fonte */
-            margin-top: 15px; /* Dá um espaçamento entre o logo e o título */
-            white-space: normal; /* Remove a limitação de linha única que causa os "..." */
+            order: 3; 
+            width: 100%; 
+            text-align: center; 
+            font-size: 16px; 
+            margin-top: 20px; /* Espaço entre o logo e o título */
+            margin-bottom: 10px; /* Cria um espaço entre o título e o conteúdo de baixo */
+            white-space: normal; 
             overflow: visible;
+            line-height: 1.4; /* Melhora o espaçamento entre as duas linhas do próprio título */
         }
+    
     }
