@@ -1,0 +1,176 @@
+Perfeito! Adicionei o botão de download com o atributo `download` (que força o navegador a baixar o arquivo em vez de apenas abri-lo) e incluí o título "Garantia Cliente" para separar visualmente as seções, mantendo o padrão do portal.
+
+Aqui está o código HTML atualizado:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image" href="LogoLeveros.png">
+    <title>Política de Garantia - Leveros</title>
+    <meta name="view-transition" content="same-origin">    
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="top-header">
+         <div class="header-inner">
+                <h1> Politicas de Garantia</h1>
+            <nav>
+                <ul>
+                    <li><a href="politicas.html" class="active">Politicas de Garantia</a></li>
+                    <li><a href="formPatrao.html">Solicitação Parceiros</a></li>
+                    <li><a href="informativos.html">Informativos</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </header>
+
+    <div class="ticker-wrapper">
+        <div class="ticker-content">
+            <span class="ticker-item">⚖️ Garantia Legal: 90 dias a partir da Nota Fiscal (CDC Art. 26).</span>
+            <span class="ticker-item">📖 Regras de cobertura estendida são ditadas pelo Manual do Fabricante.</span>
+            <span class="ticker-item">⚠️ Instalação inadequada ou fora do padrão gera perda de garantia.</span>
+            <span class="ticker-item">📞 Dúvidas? Direcione para a Central: 0800 770 4885 (Opção 4).</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>📜 Política <span>Bens Duráveis</span></h2>
+        <p style="text-align: center; color: var(--text-color); margin-bottom: 30px; opacity: 0.9; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+            A Leveros atua em conformidade com o Código de Defesa do Consumidor (Lei nº 8.078/90) e orienta seus clientes sobre as condições gerais de garantia aplicáveis à compra de aparelhos de ar-condicionado e similares.
+        </p>
+        
+        <div class="layout-wrapper" style="display: flex; flex-direction: column; gap: 20px;">
+            
+            <div class="card-panel">
+                <span class="section-title" style="color: var(--azul);">📄 Políticas de Garantia | Patrão Leveros (PDF)</span>
+                <p style="margin-top: 10px; margin-bottom: 15px; font-size: 14px; opacity: 0.8;">
+                    Visualize abaixo o documento completo com as regras e exigências de garantia para Patrões.
+                </p>
+                
+                <a href="politicas_garantia.pdf" download="Politicas_Garantia_Patrao.pdf" style="display: inline-block; margin-bottom: 15px; padding: 10px 20px; background-color: #006172; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: background-color 0.3s;">
+                    ⬇️ Baixar PDF
+                </a>
+
+                <div style="width: 100%; height: 600px; border-radius: 8px; overflow: hidden; border: 1px solid var(--glass-border); background-color: #f1f3f5;">
+                    <iframe src="politicas_garantia.pdf" width="100%" height="100%" style="border: none;">
+                        <p>Seu navegador não suporta a visualização de PDFs nativamente. <a href="politicas_garantia.pdf" target="_blank">Clique aqui para baixar o arquivo oficial.</a></p>
+                    </iframe>
+                </div>
+            </div>
+
+            <h1 style="margin-top: 40px; margin-bottom: 10px; font-size: 24px; color: var(--azul); border-bottom: 2px solid var(--glass-border); padding-bottom: 10px;">
+                👤 Garantia Cliente
+</h1>
+
+            <div class="card-panel">
+                <span class="section-title">1. Garantia Legal</span>
+                <p style="margin-top: 10px; line-height: 1.6;">
+                    Todo produto comercializado possui garantia legal de <strong>90 (noventa) dias</strong>, contados a partir da data de faturamento da nota fiscal, conforme previsto no Art. 26, inciso I, do Código de Defesa do Consumidor.
+                </p>
+                <p style="margin-top: 10px; line-height: 1.6;">
+                    Essa garantia cobre defeitos de fabricação que comprometam o funcionamento adequado do produto.
+                </p>
+            </div>
+
+            <div class="card-panel">
+                <span class="section-title">2. Garantia do Fabricante</span>
+                <p style="margin-top: 10px; line-height: 1.6;">
+                    Além da garantia legal, os equipamentos podem contar com garantia adicional oferecida pelo fabricante, cujos prazos, condições e coberturas são definidos exclusivamente no manual de garantia de cada produto.
+                </p>
+                <div style="margin-top: 15px; padding: 12px 15px; background-color: #f8f9fa; border-left: 4px solid var(--text-color); border-radius: 4px; font-size: 14px;">
+                    <strong>Nota Importante:</strong> A Leveros não possui autonomia para alterar, estender ou intervir nas regras da garantia concedida pelo fabricante.
+                </div>
+            </div>
+
+            <div class="card-panel" style="border-top: 4px solid #dc3545;">
+                <span class="section-title" style="color: #dc3545;">3. Condições para Validade da Garantia</span>
+                <p style="margin-top: 10px; line-height: 1.6;">
+                    A garantia legal e/ou do fabricante poderá ser perdida ou invalidada, não se limitando, aos seguintes casos:
+                </p>
+                <ul style="margin-top: 15px; padding-left: 20px; line-height: 1.8;">
+                    <li>Instalação, manutenção, reparo ou qualquer intervenção técnica realizada em desacordo com as orientações do manual do equipamento e/ou executada por profissional não habilitado ou não autorizado pelo fabricante.</li>
+                    <li>Utilização inadequada do equipamento.</li>
+                    <li>Alterações, adaptações ou reparos não autorizados.</li>
+                    <li>Danos causados por fatores externos, tais como quedas, impactos, oscilações elétricas, exposição inadequada, mau uso ou eventos da natureza.</li>
+                </ul>
+            </div>
+
+            <div class="card-panel">
+                <span class="section-title">4. Instalação do Equipamento</span>
+                <p style="margin-top: 10px; line-height: 1.6;">
+                    A instalação correta do ar-condicionado é fundamental para o desempenho do equipamento e para a preservação da garantia.
+                </p>
+                <p style="margin-top: 10px; line-height: 1.6;">
+                    Recomendamos que a instalação seja realizada por profissionais qualificados, respeitando rigorosamente as especificações técnicas descritas no manual de garantia de cada equipamento.
+                </p>
+            </div>
+
+            <div class="card-panel">
+                <span class="section-title" style="color: var(--amarelo);">5. Como Acionar a Garantia</span>
+                <p style="margin-top: 10px; line-height: 1.6;">
+                    Em caso de identificação de possível defeito de fabricação dentro do prazo de garantia, o consumidor deverá acionar, preferencialmente, a rede de assistência técnica autorizada do fabricante, conforme orientações contidas no manual do produto.
+                </p>
+                <p style="margin-top: 10px; margin-bottom: 20px; line-height: 1.6;">
+                    Caso necessite de apoio ou orientações adicionais para o acionamento da garantia junto ao fabricante, permanecemos à disposição para auxiliar por meio de nosso canal de atendimento:
+                </p>
+                
+                <div style="background: #0056b3; color: white; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <h3 style="margin-bottom: 10px; font-weight: 600; color: white;">Central de Atendimento Leveros</h3>
+                    <div style="font-size: 28px; font-weight: bold; margin-bottom: 5px;">0800 770 4885</div>
+                    <div style="font-size: 16px; opacity: 0.9;">Opção 4 – Garantia</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // ── Cole este bloco no <script> de cada página que usar o hambúrguer ──
+        (function () {
+            const hamburger = document.getElementById('hamburger');
+            if (!hamburger) return;
+
+            // Cria o menu mobile dinamicamente a partir dos itens do nav desktop
+            const navLinks = document.querySelectorAll('nav ul li a');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'mobile-menu';
+            mobileMenu.id = 'mobileMenu';
+
+            mobileMenu.style.position = 'fixed';
+            mobileMenu.style.top = '60px'; // ajuste para a altura real do seu header
+            mobileMenu.style.left = '0';
+            mobileMenu.style.width = '100%';
+            mobileMenu.style.zIndex = '999'; // menor que o header
+
+            navLinks.forEach(link => {
+                const a = document.createElement('a');
+                a.href = link.href;
+                a.textContent = link.textContent;
+                if (link.classList.contains('active')) a.classList.add('active');
+                a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+                mobileMenu.appendChild(a);
+            });
+
+            document.body.appendChild(mobileMenu);
+
+            hamburger.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+            });
+
+            // Fecha ao clicar fora
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.remove('open');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
+
+```
