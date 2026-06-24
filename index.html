@@ -122,6 +122,22 @@
             text-align: center;
             opacity: 0.8;
         }
+
+
+         /* =========================================
+               CORREÇÃO DA LOGO MOBILE
+        ========================================= */
+            .header-logo {
+                object-fit: contain; /* Impede que a imagem seja achatada */
+            }
+            
+            @media (max-width: 768px) {
+                .header-inner img.header-logo {
+                    width: 140px !important; /* Mantém a largura que você configurou */
+                    height: auto !important; /* Libera a altura para acompanhar a proporção da largura */
+                }
+            }
+        
     </style>
 </head>
 
