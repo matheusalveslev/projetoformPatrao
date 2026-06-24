@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador de Garantia - Parceiros</title>
+    <meta name="view-transition" content="same-origin">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="header-inner">
+            
+            <!-- Imagem do logo inserida aqui, antes do título -->
+            <img src="LogoLeveros.png" alt="Logo Leveros" width="200">
+            
+            <h1> Triagem - Garantia | Patrão Leveros</h1>
+            
+            <nav>
+                <ul>
+                    <li><a href="politicas.html">Politicas de Garantia</a></li>
+                    <li><a href="formPatrao.html" class="active">Solicitação Parceiros</a></li>
+                    <li><a href="informativos.html">Informativos</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </header>
+
+    <div class="ticker-wrapper">
+        <div class="ticker-content">
+            <span class="ticker-item">🌟 Parceiros: Diagnóstico é de sua responsabilidade!</span>
+            <span class="ticker-item">⚙️ Anexe fotos nítidas das etiquetas da Evaporadora e Condensadora.</span>
+            <span class="ticker-item">⚡ Compressores exigem teste de continuidade e isolamento.</span>
+            <span class="ticker-item">📋 Use o texto gerado aqui para abrir sua solicitação na Uappi/LVI.</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>🛠️ Validador de Peças <span>Parceiros Autorizados</span></h2>
+        
+        <div class="layout-wrapper">
+            <div class="form-column">
+                <div class="card-panel">
+                    <span class="section-title">Dados do Equipamento</span>
+                    
+                    <div class="form-group">
+                        <label for="marcaParceiro">Marca / Linha:</label>
+                        <select id="marcaParceiro" onchange="avaliarMarcaParceiro()">
+                            <option value="">Selecione a marca...</option>
+                            <option value="AGRATTO">Agratto</option>
+                            <option value="MIDEA_RAC">Midea-Carrier (RAC)</option>
+                            <option value="MIDEA_CAC">Midea-Carrier (CAC)</option>
+                            <option value="DAIKIN">Daikin</option>
+                            <option value="ELGIN_RAC">Elgin (RAC)</option>
+                            <option value="ELGIN_CAC">Elgin (CAC)</option>
+                            <option value="FUJITSU">Fujitsu</option>
+                            <option value="GREE">Gree</option>
+                            <option value="LG_RAC">LG (RAC)</option>
+                            <option value="LG_CAC">LG (CAC)</option>
+                            <option value="PHILCO">Philco</option>
+                            <option value="TCL">TCL</option>
+                            <option value="TRANE">Trane</option>
+                            <option value="HITACHI_RAC">Hitachi (RAC)</option>
+                            <option value="HITACHI_CAC">Hitachi (CAC)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group hidden" id="divTecnologiaParceiro">
+                        <label for="tecnologiaParceiro">Tecnologia:</label>
+                        <select id="tecnologiaParceiro" onchange="avaliarFluxoParceiro()">
+                            <option value="">Selecione a tecnologia...</option>
+                            <option value="ONOFF">Convencional (ON/OFF)</option>
+                            <option value="INVERTER">Inverter</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dataNfParceiro">Data de Emissão da Nota Fiscal:</label>
+                        <input type="date" id="dataNfParceiro" onchange="avaliarFluxoParceiro()">
+                    </div>
+
+                    <div class="form-group" style="margin-top: 15px; border-top: 1px dashed var(--glass-border); padding-top: 15px;">
+                        <label for="tipoDefeito" style="color: var(--azul);">Qual o componente com defeito?</label>
+                        <select id="tipoDefeito" onchange="avaliarDefeito()">
+                            <option value="">Selecione...</option>
+                            <option value="COMPRESSOR">Compressor</option>
+                            <option value="PLACA">Placa Eletrônica (Principal/Inverter)</option>
+                            <option value="MOTOR">Motor Ventilador / Turbina</option>
+                            <option value="SERPENTINA">Vazamento na Serpentina (Evap/Cond)</option>
+                            <option value="FALTA_PECA">Peça ou Acessório Faltante</option>
+                            <option value="OUTROS">Outros Componentes (Sensores, Carenagem, etc)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group hidden" id="divDataRecebimentoParceiro">
+                        <label for="dataRecebimentoParceiro" style="color: var(--amarelo);">Data de Recebimento do Produto (Cliente):</label>
+                        <input type="date" id="dataRecebimentoParceiro" onchange="avaliarFluxoParceiro()">
+                    </div>
+                </div>
+
+                <div class="card-panel result-box hidden" id="resultadoParceiro" style="margin-bottom: 0;">
+                    
+                    <div id="statusGarantiaBoxParceiro" class="status-box hidden"></div>
+
+                    <!-- Alertas Dinâmicos de Evidências -->
+                    <div id="alertaCompressor" class="status-nok hidden" style="padding: 14px 18px; margin-bottom: 20px; border-radius: 8px; background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba;">
+                        <strong style="display:block; margin-bottom: 6px;">⚡ EXIGÊNCIA TÉCNICA: COMPRESSOR</strong>
+                        Obrigatório informar no laudo o teste de isolamento (massa) e o valor ôhmico das bobinas. A fábrica poderá solicitar a devolução da peça defeituosa (Logística Reversa). Não descarte o compressor antigo.
+                    </div>
+
+                    <div id="alertaPlaca" class="status-nok hidden" style="padding: 14px 18px; margin-bottom: 20px; border-radius: 8px; background-color: #e2e3e5; color: #383d41; border: 1px solid #d6d8db;">
+                        <strong style="display:block; margin-bottom: 6px;">🔌 EXIGÊNCIA TÉCNICA: PLACA</strong>
+                        Em máquinas Inverter, certifique-se de que a falha não é no cabo de comunicação (Sinal PP). Informe no laudo a tensão medida na entrada da borneira e o código de erro apresentado no painel/LED.
+                    </div>
+
+                    <div id="alertaVazamento" class="status-nok hidden" style="padding: 14px 18px; margin-bottom: 20px; border-radius: 8px; background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb;">
+                        <strong style="display:block; margin-bottom: 6px;">💧 EXIGÊNCIA TÉCNICA: VAZAMENTO</strong>
+                        A fábrica não cobre vazamentos nas flanges de interligação. É obrigatório atestar no laudo que o equipamento foi pressurizado (Nitrogênio) e a bolha/vazamento encontra-se na serpentina original de fábrica.
+                    </div>
+
+                    <div class="checklist-parceiro" style="margin-top: 20px; background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid var(--glass-border);">
+                        <h4 style="margin-bottom: 10px; color: var(--text-color);">📑 Check-list antes de abrir o chamado:</h4>
+                        <label style="display: block; margin-bottom: 8px; font-size: 13px; cursor: pointer;">
+                            <input type="checkbox" id="chkNf" onchange="gerarScriptParceiro()"> Tenho a cópia da NF de Compra do Equipamento
+                        </label>
+                        <label style="display: block; margin-bottom: 8px; font-size: 13px; cursor: pointer;">
+                            <input type="checkbox" id="chkEtiquetas" onchange="gerarScriptParceiro()"> Tenho fotos nítidas das Etiquetas (Evap e Cond)
+                        </label>
+                        <label style="display: block; margin-bottom: 8px; font-size: 13px; cursor: pointer;">
+                            <input type="checkbox" id="chkLaudo" onchange="gerarScriptParceiro()"> O Laudo Técnico detalhado está pronto
+                        </label>
+                    </div>
+
+                    <div class="resumo-crm-container" style="margin-top: 25px; border-top: 1px solid var(--glass-border); padding-top: 20px;">
+                        <h3>📝 Resumo para Solicitação (Uappi / LVI)</h3>
+                        <p style="font-size: 13px; color: #666; margin-bottom: 10px;">Copie este escopo para anexar na sua solicitação de peça.</p>
+                        
+                        <textarea id="textoScriptParceiro" readonly rows="12" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; resize: vertical; background: #f9f9f9; color: #333; font-family: monospace; font-size: 13px; margin-bottom: 15px;"></textarea>
+                        
+                        <button id="btnCopiarParceiro" onclick="copiarScriptParceiro()" style="width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s;">
+                            📋 Copiar para Área de Transferência
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function avaliarMarcaParceiro() {
+            const marca = document.getElementById("marcaParceiro").value;
+            const divTec = document.getElementById("divTecnologiaParceiro");
+            const tecInput = document.getElementById("tecnologiaParceiro");
+            
+            if (["MIDEA_RAC", "MIDEA_CAC", "PHILCO", "TCL"].includes(marca)) {
+                divTec.classList.remove("hidden");
+            } else {
+                divTec.classList.add("hidden");
+                tecInput.value = ""; 
+            }
+            avaliarFluxoParceiro();
+        }
+
+        function avaliarDefeito() {
+            const defeito = document.getElementById("tipoDefeito").value;
+            const divRec = document.getElementById("divDataRecebimentoParceiro");
+            
+            // Ocultar todos os alertas
+            document.getElementById("alertaCompressor").classList.add("hidden");
+            document.getElementById("alertaPlaca").classList.add("hidden");
+            document.getElementById("alertaVazamento").classList.add("hidden");
+
+            if (defeito === "FALTA_PECA") {
+                divRec.classList.remove("hidden");
+            } else {
+                divRec.classList.add("hidden");
+                document.getElementById("dataRecebimentoParceiro").value = "";
+                
+                if (defeito === "COMPRESSOR") document.getElementById("alertaCompressor").classList.remove("hidden");
+                if (defeito === "PLACA") document.getElementById("alertaPlaca").classList.remove("hidden");
+                if (defeito === "SERPENTINA") document.getElementById("alertaVazamento").classList.remove("hidden");
+            }
+            avaliarFluxoParceiro();
+        }
+
+        function calcularPrazoContratual(marca, tec, dataNF, tipoDefeito) {
+            const data = new Date(dataNF + "T00:00:00");
+            let mesesGeral = 0;
+            let mesesCompressor = 0;
+            let diasFalta = (marca === "LG_RAC" || marca === "LG_CAC") ? 30 : 15;
+
+            switch(marca) {
+                case "AGRATTO": mesesGeral = 12; mesesCompressor = 12; break;
+                case "MIDEA_RAC":
+                    mesesGeral = (tec === "INVERTER") ? 24 : 12;
+                    mesesCompressor = (tec === "INVERTER") ? 120 : 12;
+                    break;
+                case "MIDEA_CAC":
+                    mesesGeral = (tec === "INVERTER") ? 36 : 12;
+                    mesesCompressor = (tec === "INVERTER") ? 36 : 12;
+                    break;
+                case "DAIKIN": mesesGeral = 24; mesesCompressor = 60; break;
+                case "ELGIN_RAC":
+                    mesesGeral = (data >= new Date("2023-01-01T00:00:00")) ? 36 : 12;
+                    mesesCompressor = (data >= new Date("2023-01-01T00:00:00")) ? 120 : 12;
+                    break;
+                case "ELGIN_CAC":
+                    mesesGeral = (data >= new Date("2022-01-01T00:00:00")) ? 36 : 12;
+                    mesesCompressor = mesesGeral;
+                    break;
+                case "FUJITSU": mesesGeral = 24; mesesCompressor = 60; break;
+                case "GREE":
+                    mesesGeral = (data >= new Date("2022-08-15T00:00:00")) ? 60 : 12;
+                    mesesCompressor = (data >= new Date("2022-08-15T00:00:00")) ? 120 : 12;
+                    break;
+                case "LG_RAC":
+                    const aPartir2025 = (data >= new Date("2025-09-01T00:00:00"));
+                    mesesGeral = aPartir2025 ? 24 : 12;
+                    mesesCompressor = 120;
+                    break;
+                case "LG_CAC": mesesGeral = 12; mesesCompressor = 12; break;
+                case "PHILCO":
+                case "TCL":
+                    mesesGeral = (tec === "INVERTER") ? 24 : 12;
+                    mesesCompressor = (tec === "INVERTER") ? 120 : 12;
+                    break;
+                case "TRANE": mesesGeral = 36; mesesCompressor = 36; break;
+                case "HITACHI_RAC": mesesGeral = 24; mesesCompressor = 144; break;
+                case "HITACHI_CAC": mesesGeral = 12; mesesCompressor = 12; break;
+            }
+
+            // Se for defeito no compressor, aplica a regra do compressor
+            if (tipoDefeito === "COMPRESSOR") {
+                return { meses: mesesCompressor, tipo: "Compressor", diasFalta: 0 };
+            }
+            return { meses: mesesGeral, tipo: "Geral", diasFalta: diasFalta };
+        }
+
+        function avaliarFluxoParceiro() {
+            const marca = document.getElementById("marcaParceiro").value;
+            const tec = document.getElementById("tecnologiaParceiro").value;
+            const dataNF = document.getElementById("dataNfParceiro").value;
+            const defeito = document.getElementById("tipoDefeito").value;
+            const dataRec = document.getElementById("dataRecebimentoParceiro").value;
+            
+            const resBox = document.getElementById("resultadoParceiro");
+            const statBox = document.getElementById("statusGarantiaBoxParceiro");
+
+            if (!marca || !dataNF || !defeito) { resBox.classList.add("hidden"); return; }
+            if (["MIDEA_RAC", "MIDEA_CAC", "PHILCO", "TCL"].includes(marca) && !tec) { resBox.classList.add("hidden"); return; }
+            if (defeito === "FALTA_PECA" && !dataRec) { resBox.classList.add("hidden"); return; }
+
+            const hoje = new Date();
+            hoje.setHours(0,0,0,0);
+            
+            const regra = calcularPrazoContratual(marca, tec, dataNF, defeito);
+            let isValido = false;
+            let strVencimento = "";
+            let msgGarantia = "";
+
+            if (defeito === "FALTA_PECA") {
+                const dataInicialRec = new Date(dataRec + "T00:00:00");
+                const dataVencimentoFalta = new Date(dataInicialRec.getTime());
+                dataVencimentoFalta.setDate(dataVencimentoFalta.getDate() + regra.diasFalta);
+                
+                isValido = dataVencimentoFalta >= hoje;
+                strVencimento = dataVencimentoFalta.toLocaleDateString('pt-BR');
+                msgGarantia = `Regra Peça Faltante: ${regra.diasFalta} dias após recebimento`;
+            } else {
+                const dataInicialNF = new Date(dataNF + "T00:00:00");
+                const dataVencimento = new Date(dataInicialNF.getTime());
+                dataVencimento.setMonth(dataVencimento.getMonth() + regra.meses);
+                
+                isValido = dataVencimento >= hoje;
+                strVencimento = dataVencimento.toLocaleDateString('pt-BR');
+                msgGarantia = `Garantia Contratual (${regra.tipo}): ${regra.meses} meses`;
+            }
+
+            statBox.className = "status-box " + (isValido ? "status-ok" : "status-nok");
+            statBox.innerHTML = `
+                <div style="font-weight:bold; margin-bottom:12px; font-size: 13px;">
+                    ${isValido ? '✅ DENTRO DO PRAZO (AUTORIZADO)' : '❌ FORA DO PRAZO (AUTORIZADO)'}
+                </div>
+                <div class="info-row"><span style="opacity:0.8">Regra Aplicada:</span> <strong>${msgGarantia}</strong></div>
+                <div class="info-row"><span style="opacity:0.8">Data Limite:</span> <strong>${strVencimento}</strong></div>
+            `;
+            statBox.classList.remove("hidden");
+            resBox.classList.remove("hidden");
+            
+            // Grava na div do statBox o status para puxar no script
+            statBox.dataset.status = isValido ? "APROVADO (No Prazo)" : "REPROVADO (Fora do Prazo)";
+
+            gerarScriptParceiro();
+        }
+
+        function gerarScriptParceiro() {
+            const selMarca = document.getElementById("marcaParceiro");
+            const selTec = document.getElementById("tecnologiaParceiro");
+            const selDefeito = document.getElementById("tipoDefeito");
+            const dataNF = document.getElementById("dataNfParceiro").value;
+            const statBox = document.getElementById("statusGarantiaBoxParceiro");
+
+            const formatarData = (dataStr) => {
+                if (!dataStr) return '-';
+                const partes = dataStr.split('-');
+                return partes.length === 3 ? `${partes[2]}/${partes[1]}/${partes[0]}` : dataStr;
+            };
+
+            const chkNf = document.getElementById("chkNf").checked ? "[X]" : "[ ]";
+            const chkEtiquetas = document.getElementById("chkEtiquetas").checked ? "[X]" : "[ ]";
+            const chkLaudo = document.getElementById("chkLaudo").checked ? "[X]" : "[ ]";
+
+            let script = `[SOLICITAÇÃO DE PEÇA EM GARANTIA - PARCEIRO]\n\n`;
+            script += `Marca: ${selMarca.options[selMarca.selectedIndex]?.text || '-'}\n`;
+            if (!document.getElementById("divTecnologiaParceiro").classList.contains("hidden")) {
+                script += `Tecnologia: ${selTec.options[selTec.selectedIndex]?.text || '-'}\n`;
+            }
+            script += `Data Emissão NF: ${formatarData(dataNF)}\n`;
+            script += `Componente: ${selDefeito.options[selDefeito.selectedIndex]?.text || '-'}\n`;
+            
+            if (selDefeito.value === "FALTA_PECA") {
+                script += `Data Recebimento Produto: ${formatarData(document.getElementById("dataRecebimentoParceiro").value)}\n`;
+            }
+
+            script += `Validação de Prazo: ${statBox.dataset.status || '-'}\n\n`;
+            
+            script += `[CHECK-LIST DE ANEXOS]\n`;
+            script += `${chkNf} NF de Compra do Equipamento\n`;
+            script += `${chkEtiquetas} Fotos das Etiquetas (Evap/Cond)\n`;
+            script += `${chkLaudo} Laudo Técnico Preenchido\n`;
+
+            if (selDefeito.value === "COMPRESSOR") {
+                script += `\n*Atenção Backoffice: Relatório de continuidade de bobinas e teste de massa incluso no laudo.*`;
+            }
+
+            document.getElementById("textoScriptParceiro").value = script;
+        }
+
+        function copiarScriptParceiro() {
+            const textarea = document.getElementById("textoScriptParceiro");
+            navigator.clipboard.writeText(textarea.value).then(() => {
+                const btn = document.getElementById("btnCopiarParceiro");
+                btn.textContent = "✅ Copiado com sucesso!";
+                btn.style.backgroundColor = "#218838"; 
+                
+                setTimeout(() => {
+                    btn.textContent = "📋 Copiar para Área de Transferência";
+                    btn.style.backgroundColor = "#28a745"; 
+                }, 3000);
+            }).catch(err => {
+                console.error('Erro ao copiar:', err);
+                alert("Não foi possível copiar automaticamente. Selecione o texto e use Ctrl+C.");
+            });
+        }
+
+         // ── Cole este bloco no <script> de cada página que usar o hambúrguer ──
+        (function () {
+            const hamburger = document.getElementById('hamburger');
+            if (!hamburger) return;
+
+            // Cria o menu mobile dinamicamente a partir dos itens do nav desktop
+            const navLinks = document.querySelectorAll('nav ul li a');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'mobile-menu';
+            mobileMenu.id = 'mobileMenu';
+
+            mobileMenu.style.position = 'fixed';
+            mobileMenu.style.top = '60px'; // ajuste para a altura real do seu header
+            mobileMenu.style.left = '0';
+            mobileMenu.style.width = '100%';
+            mobileMenu.style.zIndex = '999'; // menor que o header
+
+            navLinks.forEach(link => {
+                const a = document.createElement('a');
+                a.href = link.href;
+                a.textContent = link.textContent;
+                if (link.classList.contains('active')) a.classList.add('active');
+                a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+                mobileMenu.appendChild(a);
+            });
+
+            document.body.appendChild(mobileMenu);
+
+            hamburger.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+            });
+
+            // Fecha ao clicar fora
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.remove('open');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
