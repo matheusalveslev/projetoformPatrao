@@ -8,8 +8,18 @@
     <meta name="view-transition" content="same-origin">    
     <link rel="stylesheet" href="style.css">
     
-    <!-- Estilos específicos para o Hub -->
+    <!-- Estilos específicos para o Hub com Paleta Leveros -->
     <style>
+        /* Variáveis da Paleta Leveros */
+        :root {
+            --verde-1: #002D32;
+            --verde-2: #005A64;
+            --azul: #4CDDDD;
+            --verde-3: #6FFFAF;
+            --verde-4: #CEFFAE;
+            --amarelo: #FFCE00;
+        }
+
         /* Animação do texto de boas-vindas */
         @keyframes fadeSlideUp {
             from {
@@ -31,19 +41,21 @@
 
         .greeting-title {
             font-size: 3.5rem;
-            font-weight: 800;
-            color: #0056b3; /* Azul Leveros */
+            font-weight: 900;
+            color: var(--verde-1); /* Aplicado Verde 1 */
             margin-bottom: 15px;
-            opacity: 0; /* Inicia invisível para a animação */
+            opacity: 0;
             animation: fadeSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            letter-spacing: -1px;
         }
 
         .greeting-subtitle {
             font-size: 1.5rem;
-            color: #555;
+            font-weight: 500;
+            color: var(--verde-2); /* Aplicado Verde 2 */
             margin-bottom: 50px;
             opacity: 0;
-            animation: fadeSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards; /* Delay de 0.2s */
+            animation: fadeSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
         }
 
         /* Container dos Cartões */
@@ -53,13 +65,13 @@
             gap: 30px;
             flex-wrap: wrap;
             opacity: 0;
-            animation: fadeSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards; /* Delay de 0.4s */
+            animation: fadeSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
         }
 
-        /* Estilo dos Cartões (Cards) */
+        /* Estilo dos Cartões */
         .hub-card {
             background: #ffffff;
-            border: 1px solid #e0e0e0;
+            border: 2px solid #e0e0e0;
             border-radius: 16px;
             width: 260px;
             padding: 40px 20px;
@@ -70,7 +82,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
             position: relative;
             overflow: hidden;
         }
@@ -81,8 +93,8 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: #0056b3;
+            height: 6px;
+            background: var(--amarelo); /* Aplicado Amarelo */
             transform: scaleX(0);
             transition: transform 0.3s ease;
             transform-origin: left;
@@ -90,26 +102,40 @@
 
         .hub-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 12px 30px rgba(0, 86, 179, 0.15);
-            border-color: #cce5ff;
+            box-shadow: 0 12px 30px rgba(0, 45, 50, 0.15); /* Sombra baseada no Verde 1 */
+            border-color: var(--azul); /* Borda Azul no hover */
         }
 
         .hub-card:hover::before {
             transform: scaleX(1);
         }
 
-        .hub-icon {
-            font-size: 4rem;
-            transition: transform 0.3s ease;
+        /* Círculo de fundo para os ícones */
+        .icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background-color: var(--verde-4); /* Fundo Verde 4 */
+            border-radius: 50%;
+            margin-bottom: 5px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
-        .hub-card:hover .hub-icon {
+        .hub-icon {
+            font-size: 2.5rem;
+        }
+
+        .hub-card:hover .icon-wrapper {
+            background-color: var(--verde-3); /* Muda para Verde 3 no hover */
             transform: scale(1.1);
         }
 
         .hub-title {
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--verde-1); /* Aplicado Verde 1 */
         }
 
         /* Footer */
@@ -151,23 +177,29 @@
             
             <!-- Card 1: Garantia -->
             <a href="formPatrao.html" class="hub-card">
-                <div class="hub-icon">🛡️</div>
+                <div class="icon-wrapper">
+                    <div class="hub-icon">🛡️</div>
+                </div>
                 <div class="hub-title">Garantia do Produto</div>
-                <p style="font-size: 13px; color: #666; margin: 0;">Acione a garantia, solicite peças e visualize laudos.</p>
+                <p style="font-size: 13px; color: #666; margin: 0; line-height: 1.4;">Acione a garantia, solicite peças e visualize laudos técnicos.</p>
             </a>
 
             <!-- Card 2: Trocas & Devoluções -->
             <a href="trocas.html" class="hub-card">
-                <div class="hub-icon">🔄</div>
+                <div class="icon-wrapper">
+                    <div class="hub-icon">🔄</div>
+                </div>
                 <div class="hub-title">Trocas & Devoluções</div>
-                <p style="font-size: 13px; color: #666; margin: 0;">Avarias, arrependimentos e retornos de mercadoria.</p>
+                <p style="font-size: 13px; color: #666; margin: 0; line-height: 1.4;">Reporte avarias, arrependimentos e retornos de mercadoria.</p>
             </a>
 
             <!-- Card 3: Entregas -->
             <a href="entregas.html" class="hub-card">
-                <div class="hub-icon">🚚</div>
+                <div class="icon-wrapper">
+                    <div class="hub-icon">🚚</div>
+                </div>
                 <div class="hub-title">Entrega do Produto</div>
-                <p style="font-size: 13px; color: #666; margin: 0;">Acompanhe o rastreio e status logístico do pedido.</p>
+                <p style="font-size: 13px; color: #666; margin: 0; line-height: 1.4;">Acompanhe o rastreio e o status logístico do seu pedido.</p>
             </a>
 
         </div>
@@ -194,25 +226,39 @@
             mobileMenu.style.left = '0';
             mobileMenu.style.width = '100%';
             mobileMenu.style.zIndex = '999'; 
+            mobileMenu.style.backgroundColor = 'var(--verde-1)'; // Ajustado para a paleta Leveros
 
             navLinks.forEach(link => {
                 const a = document.createElement('a');
                 a.href = link.href;
                 a.textContent = link.textContent;
-                if (link.classList.contains('active')) a.classList.add('active');
+                a.style.color = '#fff';
+                a.style.display = 'block';
+                a.style.padding = '15px';
+                a.style.textAlign = 'center';
+                a.style.textDecoration = 'none';
+                a.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
+
+                if (link.classList.contains('active')) {
+                    a.style.backgroundColor = 'var(--verde-2)';
+                }
+
                 a.addEventListener('click', () => mobileMenu.classList.remove('open'));
                 mobileMenu.appendChild(a);
             });
 
+            // Oculta por padrão
+            mobileMenu.style.display = 'none';
             document.body.appendChild(mobileMenu);
 
             hamburger.addEventListener('click', () => {
-                mobileMenu.classList.toggle('open');
+                const isOpen = mobileMenu.style.display === 'block';
+                mobileMenu.style.display = isOpen ? 'none' : 'block';
             });
 
             document.addEventListener('click', (e) => {
                 if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
-                    mobileMenu.classList.remove('open');
+                    mobileMenu.style.display = 'none';
                 }
             });
         })();
