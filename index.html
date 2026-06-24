@@ -8,76 +8,49 @@
     <meta name="view-transition" content="same-origin">    
     <link rel="stylesheet" href="style.css">
     
-    <!-- Estilos específicos para o Hub com Paleta Leveros -->
+    <!-- Estilos exclusivos do Hub (integrados com as variáveis do seu style.css) -->
     <style>
-        /* Variáveis da Paleta Leveros */
-        :root {
-            --verde-1: #002D32;
-            --verde-2: #005A64;
-            --azul: #4CDDDD;
-            --verde-3: #6FFFAF;
-            --verde-4: #CEFFAE;
-            --amarelo: #FFCE00;
-        }
-
-        /* Animação do texto de boas-vindas */
-        @keyframes fadeSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hub-container {
-            max-width: 1000px;
-            margin: 60px auto;
-            padding: 0 20px;
+        .hub-wrapper {
             text-align: center;
+            padding-top: 40px; /* Dá um respiro abaixo do header */
         }
 
         .greeting-title {
-            font-size: 3.5rem;
+            font-size: clamp(32px, 5vw, 56px);
             font-weight: 900;
-            color: #ffffff; /* CORRIGIDO: Branco para dar contraste no fundo escuro */
-            margin-bottom: 15px;
-            opacity: 0;
-            animation: fadeSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            color: white; 
+            margin-bottom: 10px;
             letter-spacing: -1px;
+            animation: fadeUp 0.6s ease both;
         }
 
         .greeting-subtitle {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--azul); /* CORRIGIDO: Azul claro para ficar legível e moderno */
-            margin-bottom: 50px;
-            opacity: 0;
-            animation: fadeSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
+            font-size: clamp(16px, 2.5vw, 24px);
+            font-weight: 700;
+            color: var(--azul);
+            margin-bottom: 60px;
+            opacity: 0.9;
+            animation: fadeUp 0.6s ease both 0.2s;
         }
 
-        /* Container dos Cartões */
+        /* Grade dos Cartões */
         .cards-grid {
             display: flex;
             justify-content: center;
             gap: 30px;
             flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
+            animation: fadeUp 0.8s ease both 0.4s;
         }
 
-        /* Estilo dos Cartões */
+        /* Estilo dos Cartões - Fundo Branco para destacar no fundo escuro */
         .hub-card {
             background: #ffffff;
-            border: 2px solid #e0e0e0;
+            border: none;
             border-radius: 16px;
-            width: 260px;
-            padding: 40px 20px;
+            width: 280px;
+            padding: 40px 24px;
             text-decoration: none;
-            color: #333;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
@@ -87,6 +60,7 @@
             overflow: hidden;
         }
 
+        /* Barra amarela superior no hover */
         .hub-card::before {
             content: "";
             position: absolute;
@@ -102,25 +76,24 @@
 
         .hub-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); 
-            border-color: var(--azul);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
 
         .hub-card:hover::before {
             transform: scaleX(1);
         }
 
-        /* Círculo de fundo para os ícones */
+        /* Ícones */
         .icon-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 80px;
             height: 80px;
-            background-color: var(--verde-4);
+            background-color: #E8F5E9; /* Verde bem clarinho de fundo */
             border-radius: 50%;
-            margin-bottom: 5px;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .hub-icon {
@@ -128,38 +101,43 @@
         }
 
         .hub-card:hover .icon-wrapper {
-            background-color: var(--verde-3);
+            background-color: var(--verde3);
             transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(111, 255, 175, 0.5);
         }
 
+        /* Textos dentro do Cartão (Precisam ser escuros para aparecer no fundo branco) */
         .hub-title {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 800;
-            color: var(--verde-1);
+            color: var(--verde1);
+            text-align: center;
         }
 
-        /* Footer Redesenhado */
-        .hub-footer {
-            margin-top: 80px;
-            padding: 25px 20px;
+        .hub-desc {
+            font-size: 13px;
+            color: var(--verde2);
+            margin: 0;
+            line-height: 1.5;
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.15); /* Fundo sutil para separar do corpo */
-            border-top: 1px solid rgba(255, 255, 255, 0.05); /* Linha muito suave e elegante */
-            color: #b0bec5; /* Cinza claro, legível mas discreto */
-            font-size: 14px;
-            letter-spacing: 0.5px;
+            opacity: 0.8;
         }
     </style>
 </head>
 
 <body>
+    <!-- Camada de fundo do seu CSS -->
+    <div class="bg-layer"></div>
+
     <header class="top-header">
          <div class="header-inner">
-            <img src="LogoLeveros.png" class="header-logo" alt="Leveros" style="height: 40px;">
+            <div class="logo-area">
+                <img src="LogoLeveros.png" class="header-logo" alt="Leveros">
+            </div>
             <nav>
                 <ul>
                     <li><a href="index.html" class="active">Início</a></li>
-                    <li><a href="politicas.html">Politicas de Garantia</a></li>
+                    <li><a href="politicas.html">Políticas de Garantia</a></li>
                     <li><a href="formPatrao.html">Solicitação Parceiros</a></li>
                     <li><a href="informativos.html">Informativos</a></li>
                 </ul>
@@ -168,99 +146,87 @@
         </div>
     </header>
 
-    <main class="hub-container">
-        
-        <!-- Texto Animado -->
-        <h1 class="greeting-title">FALA MEU PATRÃO!</h1>
-        <p class="greeting-subtitle">O que vamos resolver hoje?</p>
-
-        <!-- Grade de Opções (Cards) -->
-        <div class="cards-grid">
+    <!-- Usando o seu .container nativo para respeitar margens e paddings -->
+    <main class="container">
+        <div class="hub-wrapper">
             
-            <!-- Card 1: Garantia -->
-            <a href="formPatrao.html" class="hub-card">
-                <div class="icon-wrapper">
-                    <div class="hub-icon">🛡️</div>
-                </div>
-                <div class="hub-title">Garantia do Produto</div>
-                <p style="font-size: 13px; color: #666; margin: 0; line-height: 1.4;">Acione a garantia, solicite peças e visualize laudos técnicos.</p>
-            </a>
+            <!-- Texto Animado -->
+            <h1 class="greeting-title">FALA MEU PATRÃO!</h1>
+            <p class="greeting-subtitle">O que vamos resolver hoje?</p>
 
-            <!-- Card 2: Trocas & Devoluções -->
-            <a href="trocas.html" class="hub-card">
-                <div class="icon-wrapper">
-                    <div class="hub-icon">🔄</div>
-                </div>
-                <div class="hub-title">Trocas & Devoluções</div>
-                <p style="font-size: 13px; color: #666; margin: 0; line-height: 1.4;">Reporte avarias, arrependimentos e retornos de mercadoria.</p>
-            </a>
+            <!-- Grade de Opções (Cards) -->
+            <div class="cards-grid">
+                
+                <!-- Card 1: Garantia -->
+                <a href="formPatrao.html" class="hub-card">
+                    <div class="icon-wrapper">
+                        <div class="hub-icon">🛡️</div>
+                    </div>
+                    <div class="hub-title">Garantia do Produto</div>
+                    <p class="hub-desc">Acione a garantia, solicite peças e visualize laudos técnicos.</p>
+                </a>
 
-            <!-- Card 3: Entregas -->
-            <a href="entregas.html" class="hub-card">
-                <div class="icon-wrapper">
-                    <div class="hub-icon">🚚</div>
-                </div>
-                <div class="hub-title">Entrega do Produto</div>
-                <p style="font-size: 13px; color: #666; margin: 0; line-height: 1.4;">Acompanhe o rastreio e o status logístico do seu pedido.</p>
-            </a>
+                <!-- Card 2: Trocas & Devoluções -->
+                <a href="trocas.html" class="hub-card">
+                    <div class="icon-wrapper">
+                        <div class="hub-icon">🔄</div>
+                    </div>
+                    <div class="hub-title">Trocas & Devoluções</div>
+                    <p class="hub-desc">Reporte avarias, arrependimentos e retornos de mercadoria.</p>
+                </a>
 
+                <!-- Card 3: Entregas -->
+                <a href="entregas.html" class="hub-card">
+                    <div class="icon-wrapper">
+                        <div class="hub-icon">🚚</div>
+                    </div>
+                    <div class="hub-title">Entrega do Produto</div>
+                    <p class="hub-desc">Acompanhe o rastreio e o status logístico do seu pedido.</p>
+                </a>
+
+            </div>
         </div>
-
     </main>
 
-    <footer class="hub-footer">
-        <p>&copy; 2026 Leveros. Todos os direitos reservados. Plataforma de Apoio a Parceiros e Consultores.</p>
+    <!-- Usando a estrutura nativa de rodapé do seu CSS -->
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Leveros. Todos os direitos reservados. Plataforma de Apoio a Parceiros e Consultores.</p>
+        </div>
     </footer>
 
     <script>
-        // ── Script do Menu Hambúrguer ──
+        // ── Script do Menu Hambúrguer Nativo ──
         (function () {
             const hamburger = document.getElementById('hamburger');
             if (!hamburger) return;
 
             const navLinks = document.querySelectorAll('nav ul li a');
+            
+            // Cria o menu baseado na sua classe .mobile-menu do style.css
             const mobileMenu = document.createElement('div');
             mobileMenu.className = 'mobile-menu';
             mobileMenu.id = 'mobileMenu';
-
-            mobileMenu.style.position = 'fixed';
-            mobileMenu.style.top = '60px'; 
-            mobileMenu.style.left = '0';
-            mobileMenu.style.width = '100%';
-            mobileMenu.style.zIndex = '999'; 
-            mobileMenu.style.backgroundColor = 'var(--verde-1)'; 
 
             navLinks.forEach(link => {
                 const a = document.createElement('a');
                 a.href = link.href;
                 a.textContent = link.textContent;
-                a.style.color = '#fff';
-                a.style.display = 'block';
-                a.style.padding = '15px';
-                a.style.textAlign = 'center';
-                a.style.textDecoration = 'none';
-                a.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
-
-                if (link.classList.contains('active')) {
-                    a.style.backgroundColor = 'var(--verde-2)';
-                }
-
+                if (link.classList.contains('active')) a.classList.add('active');
                 a.addEventListener('click', () => mobileMenu.classList.remove('open'));
                 mobileMenu.appendChild(a);
             });
 
-            // Oculta por padrão
-            mobileMenu.style.display = 'none';
             document.body.appendChild(mobileMenu);
 
-            hamburger.addEventListener('click', () => {
-                const isOpen = mobileMenu.style.display === 'block';
-                mobileMenu.style.display = isOpen ? 'none' : 'block';
+            hamburger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileMenu.classList.toggle('open');
             });
 
             document.addEventListener('click', (e) => {
                 if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
-                    mobileMenu.style.display = 'none';
+                    mobileMenu.classList.remove('open');
                 }
             });
         })();
